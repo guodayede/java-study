@@ -1,4 +1,4 @@
-package excell;
+package excel;
 
 import java.util.Date;
 
