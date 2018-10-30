@@ -33,7 +33,7 @@ public class Test {
         HSSFWorkbook workbooka = new ExcelUtil().setExcel("pojoA", new String[]{"名称", "数量", "价格"}, lista);
         HSSFWorkbook workbookb = new ExcelUtil().setExcel("pojoB", new String[]{"名称", "年龄", "时间"}, listb);
 
-        workbooka.write(new FileOutputStream(new File("/Users/rose/IdeaProjects/java-study/smalltools/pojoA.xls")));
-        workbookb.write(new FileOutputStream(new File("/Users/rose/IdeaProjects/java-study/smalltools/pojoB.xls")));
+        workbooka.write(new FileOutputStream(new File("pojoA.xls")));
+        workbookb.write(new FileOutputStream(new File("pojoB.xls")));
     }
 }

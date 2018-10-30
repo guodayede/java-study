@@ -19,6 +19,8 @@ import java.util.List;
 public class ExcelUtil<T> {
 
     public HSSFWorkbook setExcel(String title,String[] columnNames, List<T> tList) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, IOException {
+        Field[] declaredFields = tList.get(0).getClass().getDeclaredFields();
+
 //        1.创建Excel工作薄对象
         HSSFWorkbook workbook=new HSSFWorkbook();
 //        2.创建Excel工作表对象
@@ -26,10 +28,21 @@ public class ExcelUtil<T> {
         HSSFRow row=null;
 //        3.创建Excel工作表的第一行，并填充列名
         row=sheet.createRow(0);
-        for(int i=0;i<columnNames.length;i++){
-            row.createCell(i).setCellValue(columnNames[i]);
+        for (int i=0;i<declaredFields.length;i++){
+            ExcelName excelName = declaredFields[i].getAnnotation(ExcelName.class);
+            if(excelName!=null){
+                if(excelName.name()!=null){
+                    row.createCell(i).setCellValue(excelName.name());
+                }
+            }else {
+                row.createCell(i).setCellValue("");
+            }
+
         }
-        Field[] declaredFields = tList.get(0).getClass().getDeclaredFields();
+       /* for(int i=0;i<columnNames.length;i++){
+            row.createCell(i).setCellValue(columnNames[i]);
+        }*/
+
 //        4.将数据填充至表格中
         for(int j=1;j<=tList.size();j++){
             T t= tList.get(j-1);
@@ -62,7 +75,7 @@ public class ExcelUtil<T> {
 //       自动设置列宽
         for (int i = 0; i < columnNames.length; i++) {
             sheet.autoSizeColumn(i);
-//            sheet.setColumnWidth(i,sheet.getColumnWidth(i)*17/10);
+            sheet.setColumnWidth(i,sheet.getColumnWidth(i)*17/10);
         }
 
         return workbook;

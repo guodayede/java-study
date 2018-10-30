@@ -7,8 +7,11 @@ import java.util.Date;
  * @date 2018/10/26  21:51
  */
 public class PojoB {
+    @ExcelName(name = "姓名")
     private String userName;
+    @ExcelName(name = "年龄")
     private int age;
+    @ExcelName(name = "生日")
     private Date birthday;
 
     public String getUserName() {

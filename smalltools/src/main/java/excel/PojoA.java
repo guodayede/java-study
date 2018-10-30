@@ -5,8 +5,11 @@ package excel;
  * @date 2018/10/26  21:50
  */
 public class PojoA {
+    @ExcelName(name = "名称")
     private String name;
+    @ExcelName(name = "数量")
     private int num;
+    @ExcelName(name = "价格")
     private double price;
 
     public String getName() {
